@@ -36,31 +36,20 @@ public class ProbabilistcTuringMachineTest {
 				rejected, blank, moveDirection, 1);
 		List<TranscictionFunction> functions = Arrays.asList(d1, d2, d3, d4,
 				d5, d6, d7, d8, d9, d10);
-		int a = 0,r = 0;
-		for(int i=0;i<999;i++){
-			ProbabilisticTuringMachine ptm = new ProbabilisticTuringMachine(blank,
-					Arrays.asList('1', '0'), even,
-					Arrays.asList(accepted, rejected), functions, input);
-		
-			while (!ptm.isFinal()) {
-				try {
-					ptm.step();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			System.out.println("Estado final = " + ptm.getCurrentState());
-			
-			if(ptm.getCurrentState()==accepted){
-				a+=1;
-			}else if(ptm.getCurrentState()==rejected){
-				r+=1;
+
+		ProbabilisticTuringMachine ptm = new ProbabilisticTuringMachine(blank,
+				Arrays.asList('1', '0'), even,
+				Arrays.asList(accepted, rejected), functions, input);
+
+		while (!ptm.isFinal()) {
+			try {
+				ptm.step();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
-		System.out.println("Prob accepted = "+(a/1000.0)*100);
-		System.out.println("Prob rejected = "+(r/1000.0)*100);
-		
+		System.out.println("Estado final = " + ptm.getCurrentState());
+
 	}
 
 }

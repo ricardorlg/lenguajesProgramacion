@@ -8,7 +8,7 @@ class TuringMachine(private var input: String, private var state: String) {
     transition.addBinding(tuple._1, tuple._2)
   }
 
-  def execute() {
+  def execute(): String = {
     while (state != "ACCEPTED" && state != "REJECTED") {
       val value = tape.getValue
       var funciones = transition((state, value)).toList
@@ -17,7 +17,8 @@ class TuringMachine(private var input: String, private var state: String) {
       tape.setValue(f._2)
       tape.move(f._3)
     }
-    println(state)
+    print(s"Estado final = $state")
+    return state
   }
   def getTransitionFunction(funciones: List[(String, Char, Direction.Value, Double)]): (String, Char, Direction.Value, Double) = {
     val p = Math.random()
